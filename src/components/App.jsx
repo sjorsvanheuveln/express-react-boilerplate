@@ -1,18 +1,15 @@
-// import "../styles/index.scss";
+import TestComponent from './TestComponent';
 
 const App = () => {
+  
+
   return (
-    <>
-      <section className="hero"></section>
-        <main>
-          <section>
-            <h1>App Component</h1>
-          </section>
-        </main>
-
-        <TestComponent />
-    </>
+    <div>
+      <h2>React Component</h2>
+      <p>app body</p>
+      <TestComponent />
+    </div>
   );
-}
+};
 
-export default App;
+export default TestComponent;
