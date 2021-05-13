@@ -44,10 +44,5 @@ module.exports = {
   },
 
   devtool: false,
-
-  devServer: {
-    hot: true,
-    contentBase: './public',
-  },
-
+  
 }
