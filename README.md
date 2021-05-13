@@ -16,7 +16,7 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 ## To Do ##
 * Make sure hot reloading is only running in dev mode!
 * React Routing
-* implement scss
+* Implement scss
 
 ## Log ##
 
@@ -25,4 +25,4 @@ My goodness we did it. The hardest part for now is over!
 I just read the documents for webpack-hot-middleware and that was enough.
 I try to strip it to its bare bones setup. It's not too much code to get it working.
 
-### 14 May: HMR Breakthrough ###
+### 14 May: ... ###

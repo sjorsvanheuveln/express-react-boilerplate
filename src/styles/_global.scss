@@ -1,0 +1,10 @@
+@use "variables";
+
+body {
+  color: var(--text);
+  background-color: variables.$bg;
+}
+
+h1 {
+	color: red;
+}
