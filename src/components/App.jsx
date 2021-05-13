@@ -1,8 +1,6 @@
 import TestComponent from './TestComponent';
 
 const App = () => {
-  
-
   return (
     <div>
       <h2>React Component</h2>
@@ -12,4 +10,4 @@ const App = () => {
   );
 };
 
-export default TestComponent;
+export default App;

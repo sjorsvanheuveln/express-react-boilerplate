@@ -1,8 +1,9 @@
 # README #
 Boilerplate for react-express apps.
 
-## To Do ##
-Just connect hot reloading. That's it!
+## Lessons Learned ##
+1. Read the original documents for fixing HMR
+  i. https://github.com/webpack-contrib/webpack-hot-middleware
 
-1. https://www.youtube.com/watch?v=tcdziJJJ7Fc&t=134s&ab_channel=LawrenceWhiteside
-2. 
+## To Do ##
+1. Make sure hot reloading is only running in dev mode!

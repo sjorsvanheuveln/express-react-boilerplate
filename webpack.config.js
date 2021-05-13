@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+const webpack = require('webpack');
 
 // set environment
 let mode = 'development';
@@ -14,10 +15,12 @@ module.exports = {
 
   entry: [
     './index.jsx',
+    'webpack-hot-middleware/client',
   ],
 
   output: {
-    path: resolve(__dirname, "public/javascripts"), 
+    path: resolve(__dirname, "public/javascripts"),
+    publicPath: '/public/',
   },
 
   module: {
@@ -32,15 +35,19 @@ module.exports = {
     ],
   },
 
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+
   resolve: {
     extensions: ['.js', '.jsx'],
   },
 
   devtool: false,
 
-  // devServer: {
-  //   hot: true,
-  //   contentBase: './dist',
-  // },
+  devServer: {
+    hot: true,
+    contentBase: './public',
+  },
 
 }

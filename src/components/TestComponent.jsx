@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const standardWallets = {
   trezor: 2,
-  ledger: 1,
+  ledger: 5,
   coldcard: 4,
 };
 
