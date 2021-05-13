@@ -26,7 +26,7 @@ const TestComponent = () => {
       <ul>
         {Object.keys(wallet).map((material) => (
           <li key={material}>
-            {material}: {wallet[material]}
+            {material}: <b>{wallet[material]}</b>
           </li>
         ))}
       </ul>
