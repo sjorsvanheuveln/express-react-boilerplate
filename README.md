@@ -18,6 +18,9 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 * React Routing
 * Implement scss
 
+## Questions ##
+1. What is post css?
+
 ## Log ##
 
 ### 13 May: HMR Breakthrough ###
