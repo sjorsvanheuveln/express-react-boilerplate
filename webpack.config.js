@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 // set environment
@@ -15,16 +16,20 @@ module.exports = {
 
   entry: [
     './index.jsx',
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?path=/__webpack_hmr',
   ],
 
   output: {
     path: resolve(__dirname, "public/javascripts"),
-    publicPath: '/public/',
+    publicPath: '/javascripts/',
   },
 
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
@@ -37,6 +42,7 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin(),
   ],
 
   resolve: {
