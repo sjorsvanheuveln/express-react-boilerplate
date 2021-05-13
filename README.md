@@ -13,17 +13,16 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
   i. https://github.com/webpack-contrib/webpack-hot-middleware
   ii. important: publicPath: '/javascripts/',
 2. Success can be just around the corner!
+3. Differense @use & @import in scss:
+    a. https://stackoverflow.com/questions/62757419/whats-the-difference-between-import-and-use-scss-rules
 
 ## To Do ##
 * Make sure hot reloading is only running in dev mode!
 * React Routing
-* Implement postcss
 * SCSS file hierarchies
 
 ## Questions ##
-1. What is post css?
-2. Is scss cross browser compatible?
-3. What is the right scss setup?
+1. What is the right scss setup?
 
 ## Log ##
 

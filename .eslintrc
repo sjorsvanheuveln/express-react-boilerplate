@@ -1,0 +1,13 @@
+{
+	"extends": "airbnb",
+	"rules": {
+    "no-unused-vars": ["error", {"argsIgnorePattern":"next"}],
+    "react/prop-types": [0],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "max-len": ["error", 380],
+    "no-restricted-properties": [0],
+    "no-restricted-syntax": [0],
+    "no-iterator": [0],
+    "import/newline-after-import": [0]
+  }
+}
