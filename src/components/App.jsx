@@ -3,9 +3,9 @@ import TestComponent from './TestComponent';
 
 const App = () => {
   return (
-    <div>
+    <div class="app-container">
       <h2>React Component</h2>
-      <p>app body</p>
+      <p>Test the reactnessss!</p>
       <TestComponent />
     </div>
   );

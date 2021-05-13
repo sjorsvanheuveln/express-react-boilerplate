@@ -1,16 +1,16 @@
 import { useState } from "react";
 
 const standardWallets = {
-  trezor: 2,
-  ledger: 5,
-  coldcard: 4,
+  Trezor: 2,
+  Ledger: 5,
+  Coldcard: 4,
 };
 
 // ES7 Object spread example
 const allWallets = {
   ...standardWallets,
-  wasabi: 1,
-  exodus: 1,
+  Wasabi: 1,
+  Exodus: 1,
 };
 
 const TestComponent = () => {
@@ -18,10 +18,9 @@ const TestComponent = () => {
 
   return (
     <div>
-      <h3>Current Wallets:</h3>
       <button onClick={() => setWallet(standardWallets)}>Standard Wallets</button>
       <button onClick={() => setWallet(allWallets)}>
-        All Wallets
+        All My Wallets
       </button>
 
       <ul>
