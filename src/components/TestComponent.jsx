@@ -13,11 +13,15 @@ const allWallets = {
   Exodus: 1,
 };
 
-const TestComponent = () => {
+const TestComponent = (props) => {
   const [wallet, setWallet] = useState(standardWallets);
+  const { text } = props;
 
   return (
-    <div>
+    <div className="app-container">
+      <h2>React Component</h2>
+      <p>{text}</p>
+
       <button type="button" onClick={() => setWallet(standardWallets)}>Standard Wallets</button>
       <button type="button" onClick={() => setWallet(allWallets)}>
         All My Wallets

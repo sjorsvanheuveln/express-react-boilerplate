@@ -1,10 +1,11 @@
 import TestComponent from './TestComponent';
 
 const App = () => (
-  <div className="app-container">
-    <h2>React Component</h2>
-    <p>Test the reactnesss!</p>
-    <TestComponent />
+  <div>
+    <h1>Express React Boiler Plate</h1>
+    <p>The lean MERN setup with Hot Module Reloading</p>
+    <br />
+    <TestComponent text="Test the reactnesss!" />
   </div>
 );
 

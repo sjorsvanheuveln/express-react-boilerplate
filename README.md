@@ -17,12 +17,14 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
     a. https://stackoverflow.com/questions/62757419/whats-the-difference-between-import-and-use-scss-rules
 
 ## To Do ##
-* Make sure hot reloading is only running in dev mode!
 * React Routing
 * How to setup Redux@latest
 
 ## Questions ##
 1. What is the right scss setup?
+2. React now demands proptypes to check props. Is this necessary?
+  a. https://www.youtube.com/watch?v=vqwAw9ByRUw
+  b. Is anti-bug/testing kind of thing. Let's ignore it for now.
 
 ## Log ##
 
@@ -37,3 +39,4 @@ Now, all good and integrated scss and postcss building!
 ### 14 May: ... ###
 ESlint is showing some annoying errors only on the desktop this morning.
 Fixed it 5 minutes later.
+Disabled HMR for production.
