@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const standardWallets = {
   Trezor: 2,
@@ -18,8 +18,8 @@ const TestComponent = () => {
 
   return (
     <div>
-      <button onClick={() => setWallet(standardWallets)}>Standard Wallets</button>
-      <button onClick={() => setWallet(allWallets)}>
+      <button type="button" onClick={() => setWallet(standardWallets)}>Standard Wallets</button>
+      <button type="button" onClick={() => setWallet(allWallets)}>
         All My Wallets
       </button>
 

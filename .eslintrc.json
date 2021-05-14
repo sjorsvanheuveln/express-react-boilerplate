@@ -19,8 +19,9 @@
     ],
     "rules": {
         "linebreak-style": ["error", "unix"],
-        "import/newline-after-import": [0],
+        "import/newline-after-import": 0,
         "react/react-in-jsx-scope" : 0, //react doesn't have to be in scope anymore
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "react/jsx-one-expression-per-line": 0
     }
 }
