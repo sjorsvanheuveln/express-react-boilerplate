@@ -1,12 +1,14 @@
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TestComponent from './TestComponent';
+import ProfilePage from './ProfilePage';
+import Header from './Header';
 
 const App = () => (
-  <div>
-    <h1>Express React Boiler Plate</h1>
-    <p>The lean MERN setup with Hot Module Reloading</p>
-    <br />
-    <TestComponent text="Test the reactnesss!" />
-  </div>
+  <Router>
+    <Header />
+    <Route exact path="/"><TestComponent text="hi" /></Route>
+    <Route path="/profile"> <ProfilePage username="Sjors" /></Route>
+  </Router>
 );
 
 export default App;

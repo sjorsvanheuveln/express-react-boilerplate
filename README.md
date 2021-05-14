@@ -15,6 +15,9 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 2. Success can be just around the corner!
 3. Differense @use & @import in scss:
     a. https://stackoverflow.com/questions/62757419/whats-the-difference-between-import-and-use-scss-rules
+4. React Router:
+  a. exact path = '/' will only! render this component on this path
+  b. so /profile won't be e.g.
 
 ## To Do ##
 * React Routing
@@ -40,3 +43,10 @@ Now, all good and integrated scss and postcss building!
 ESlint is showing some annoying errors only on the desktop this morning.
 Fixed it 5 minutes later.
 Disabled HMR for production.
+Updated Dekstop npm
+  -> New major version of npm available! 6.14.12 → 7.13.0 
+  -> npm -v (check version)
+
+
+## Epiphanies ##
+Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.

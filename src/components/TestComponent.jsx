@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const standardWallets = {
   Trezor: 2,
@@ -18,22 +19,29 @@ const TestComponent = (props) => {
   const { text } = props;
 
   return (
-    <div className="app-container">
-      <h2>React Component</h2>
-      <p>{text}</p>
+    <div>
+      <h1>Express React Boiler Plate</h1>
+      <p>The lean MERN setup with Hot Module Reloading</p>
 
-      <button type="button" onClick={() => setWallet(standardWallets)}>Standard Wallets</button>
-      <button type="button" onClick={() => setWallet(allWallets)}>
-        All My Wallets
-      </button>
+      <br />
+      <div className="app-container">
+        <h2>React Component</h2>
+        <p>{text}</p>
 
-      <ul>
-        {Object.keys(wallet).map((material) => (
-          <li key={material}>
-            {material}: <b>{wallet[material]}</b>
-          </li>
-        ))}
-      </ul>
+        <button type="button" onClick={() => setWallet(standardWallets)}>Standard Wallets</button>
+        <button type="button" onClick={() => setWallet(allWallets)}>
+          All My Wallets
+        </button>
+
+        <ul>
+          {Object.keys(wallet).map((material) => (
+            <li key={material}>
+              {material}: <b>{wallet[material]}</b>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p>Go to <Link to="/profile">Profile</Link></p>
     </div>
   );
 };
