@@ -24,11 +24,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // // HOT RELOADING ////////
-// needs fixing for production mode
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true, publicPath: webpackConfig.output.publicPath,
-}));
-app.use(require('webpack-hot-middleware')(compiler));
+if (process.env.NODE_ENV !== 'production') {
+  console.log('app.js reloading', process.env.NODE_ENV);
+  app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true, publicPath: webpackConfig.output.publicPath,
+  }));
+  app.use(require('webpack-hot-middleware')(compiler));
+}
 // /////////////////////////
 
 app.use(logger('dev'));

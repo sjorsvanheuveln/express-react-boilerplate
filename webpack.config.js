@@ -17,7 +17,6 @@ module.exports = {
 
   entry: [
     './index.jsx',
-    'webpack-hot-middleware/client?path=/__webpack_hmr',
   ],
 
   output: {
@@ -47,7 +46,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(),
   ],
 
@@ -56,4 +54,12 @@ module.exports = {
   },
 
   devtool: false,
+
 };
+
+if (mode !== 'production') {
+  module.exports.entry.unshift(
+    'webpack-hot-middleware/client?path=/__webpack_hmr',
+  );
+  module.exports.plugins.unshift(new webpack.HotModuleReplacementPlugin());
+}

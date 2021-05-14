@@ -19,7 +19,7 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 ## To Do ##
 * Make sure hot reloading is only running in dev mode!
 * React Routing
-* SCSS file hierarchies
+* How to setup Redux@latest
 
 ## Questions ##
 1. What is the right scss setup?
@@ -36,13 +36,4 @@ Now, all good and integrated scss and postcss building!
 
 ### 14 May: ... ###
 ESlint is showing some annoying errors only on the desktop this morning.
-
-
-
-.eslintrc backup
-{
-  "extends": "airbnb",
-  "rules": {
-        
-    },
-}
+Fixed it 5 minutes later.
