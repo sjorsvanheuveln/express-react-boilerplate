@@ -20,13 +20,12 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
   b. so /profile won't be e.g.
 5. Css/Bootstrap
   a. CSS is not being purged!
-  b. How to properly implement Bootstrap
-  c. 
+  b. How to properly implement Bootstrap -> Read the Docs!
+  
 
 ## To Do ##
 * How to setup Redux@latest
-* Purge CSS
-* Best way to use bootstrap.
+* Load bootstrap js properly -> check if it's purged and minified
 
 ## Questions ##
 1. What is the right scss setup?
