@@ -4,13 +4,14 @@ const webpack = require('webpack');
 
 // set environment
 let mode = 'development';
-if (process.env.NODE_ENV === "production") {
-  mode = "production";
+if (process.env.NODE_ENV === 'production') {
+  mode = 'production';
 }
+
 console.log(`Mode = ${mode}.`);
 
 module.exports = {
-  mode: mode,
+  mode,
 
   context: resolve(__dirname, 'src'),
 
@@ -20,7 +21,7 @@ module.exports = {
   ],
 
   output: {
-    path: resolve(__dirname, "public/javascripts"),
+    path: resolve(__dirname, 'public/javascripts'),
     publicPath: '/javascripts/',
   },
 
@@ -32,14 +33,14 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader'
-          ],
+          'sass-loader',
+        ],
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
     ],
@@ -55,5 +56,4 @@ module.exports = {
   },
 
   devtool: false,
-  
-}
+};

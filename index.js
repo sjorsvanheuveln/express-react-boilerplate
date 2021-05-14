@@ -1,1 +1,0 @@
-const headline = 'welcome to the webpage';

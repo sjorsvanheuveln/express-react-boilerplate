@@ -35,3 +35,14 @@ Haha, and then it got immediately broken after css building, but fixed it 2 hour
 Now, all good and integrated scss and postcss building!
 
 ### 14 May: ... ###
+ESlint is showing some annoying errors only on the desktop this morning.
+
+
+
+.eslintrc backup
+{
+  "extends": "airbnb",
+  "rules": {
+        
+    },
+}
