@@ -7,7 +7,7 @@ export default function ProfilePage(props) {
   return (
     <div>
       <h2>Profile Page</h2>
-      <p>Hi {username}. Welcome to the profile page</p>
+      <p id="inferior">Hi {username}. Welcome to the profile page</p>
       <p>Go back <Link to="/">Home</Link></p>
     </div>
   );

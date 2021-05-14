@@ -24,8 +24,9 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
   c. 
 
 ## To Do ##
-* React Routing
 * How to setup Redux@latest
+* Purge CSS
+* Best way to use bootstrap.
 
 ## Questions ##
 1. What is the right scss setup?
