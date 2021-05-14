@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const standardWallets = {
   Trezor: 2,
@@ -41,7 +40,6 @@ const TestComponent = (props) => {
           ))}
         </ul>
       </div>
-      <p>Go to <Link to="/profile">Profile</Link></p>
     </div>
   );
 };

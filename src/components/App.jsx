@@ -1,13 +1,17 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TestComponent from './TestComponent';
 import ProfilePage from './ProfilePage';
-import Header from './Header';
+import Navbar from './Navbar';
+// import Header from './Header';
 
 const App = () => (
   <Router>
-    <Header />
-    <Route exact path="/"><TestComponent text="hi" /></Route>
-    <Route path="/profile"> <ProfilePage username="Sjors" /></Route>
+    <Navbar />
+    {/*<Header />*/}
+    <div style={{ paddingTop: '10px' }}>
+      <Route exact path="/"><TestComponent text="test the reactness" /></Route>
+      <Route path="/profile"><ProfilePage username="Sjors" /></Route>
+    </div>
   </Router>
 );
 

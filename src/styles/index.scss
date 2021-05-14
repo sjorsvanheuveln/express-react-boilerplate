@@ -40,3 +40,13 @@ button {
 	background-color: hsl(274,96%,25%, 0.6);
 	box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.2);
 }
+
+.navbar-nav .nav-link a {
+	color: #666;
+	text-decoration: none;
+	font-size: 20px;
+}
+.navbar-brand a {
+	color: #222;
+	text-decoration: none;
+}

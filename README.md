@@ -18,6 +18,10 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 4. React Router:
   a. exact path = '/' will only! render this component on this path
   b. so /profile won't be e.g.
+5. Css/Bootstrap
+  a. CSS is not being purged!
+  b. How to properly implement Bootstrap
+  c. 
 
 ## To Do ##
 * React Routing
