@@ -46,7 +46,7 @@ module.exports = {
   },
 
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({ filename: '../stylesheets/main.css' }),
   ],
 
   resolve: {
