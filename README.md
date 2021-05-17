@@ -59,5 +59,11 @@ Updated Dekstop npm
       and the transitions to doing the css later.
   c. What is the best way to develop... -> css/functionality???
 
+### 17 May: Lazy ###
+Hard to start today. Don't know how to proceed? I don't have the css
+purging figured out yet. But perhaps I don't need to know that now.
+1. Basically it is already sort of purging, but not yet fully optimal.
+  -> Let's move on!
+
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.
