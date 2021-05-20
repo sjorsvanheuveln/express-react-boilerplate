@@ -9,7 +9,7 @@ const App = () => (
       <Header />
       <section className="p-3">
         <Route exact path="/"><HomePage /></Route>
-        <Route path="/account/login"><LoginPage username="Sjors" /></Route>
+        <Route path="/login"><LoginPage username="Sjors" /></Route>
       </section>
     </div>
   </Router>

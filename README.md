@@ -8,6 +8,12 @@
 ## Description ##
 The MERN setup with hot-reloading without needing webpack-dev-server.
 
+## Required Implementations ##
+* Social Media login
+* Invite a friend
+* Delete account
+* Weekly mails
+
 ## Lessons Learned ##
 1. Read the original documents for fixing HMR
   i. https://github.com/webpack-contrib/webpack-hot-middleware
@@ -21,17 +27,19 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 5. Css/Bootstrap
   a. CSS is not being purged!
   b. How to properly implement Bootstrap -> Read the Docs!
-  
+6. Passport
+  -> Local is a login strategy based on email & password from the local database.
 
 ## To Do ##
 * How to setup Redux@latest
-* Load bootstrap js properly -> check if it's purged and minified
+* Passport setup tutorial
 
 ## Questions ##
-1. What is the right scss setup?
-2. React now demands proptypes to check props. Is this necessary?
+1. React now demands proptypes to check props. Is this necessary?
   a. https://www.youtube.com/watch?v=vqwAw9ByRUw
   b. Is anti-bug/testing kind of thing. Let's ignore it for now.
+2. React Router can't reload pages where a nested route doesn't exist.
+  -> /account/login won't be reloaded as /account doesn't exist.
 
 ## Log ##
 ### 13 May: HMR Breakthrough ###
@@ -64,6 +72,10 @@ Hard to start today. Don't know how to proceed? I don't have the css
 purging figured out yet. But perhaps I don't need to know that now.
 1. Basically it is already sort of purging, but not yet fully optimal.
   -> Let's move on!
+
+### 20 May: Continued after Lazy ###
+1. Fixed bootstrap/css hotreloading + found a workable quick setup for dev and css quick compiling
+2. Reactstrap only works with bootstrap 4. -> not bad, just for dev purposes!
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.

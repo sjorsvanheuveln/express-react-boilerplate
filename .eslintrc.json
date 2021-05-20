@@ -23,6 +23,7 @@
         "react/react-in-jsx-scope" : 0, //react doesn't have to be in scope anymore
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
         "react/jsx-one-expression-per-line": 0,
-        "react/prop-types": 0
+        "react/prop-types": 0,
+        "object-curly-newline": 0
     }
 }
