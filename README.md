@@ -79,6 +79,13 @@ purging figured out yet. But perhaps I don't need to know that now.
 2. Reactstrap only works with bootstrap 4. -> not bad, just for dev purposes!
 3. Added 2FA for github. Now need to use personal access tokens.
   -> No password required no more.
+4. Implemented login stuff.
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.
+
+
+
+
+<h2><%= error.status %></h2>
+<pre><%= error.stack %></pre>

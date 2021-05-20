@@ -32,7 +32,7 @@ app.set('view engine', 'ejs');
 
 // // HOT RELOADING ////////
 if (process.env.NODE_ENV !== 'production') {
-  console.log('app.js reloading', process.env.NODE_ENV);
+  // console.log('app.js reloading', process.env.NODE_ENV);
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true, publicPath: webpackConfig.output.publicPath,
   }));
@@ -57,7 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/users', usersRouter);
 app.use('/api', apiRouter);
 app.use('/api/authentication', authRouter);
-app.use('/*', indexRouter); // this needs some new errorhandling 5MR-31
+app.use('/', indexRouter); // this needs some new errorhandling 5MR-31
 
 // Config Passport
 const User = require('./models/user');
@@ -71,14 +71,15 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // res.locals.message = err.message;
+  // res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { error: err });
+  next();
 });
 
 module.exports = app;

@@ -1,3 +1,30 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= error.status %> - <%= error.message %></title>
+    <% if (process.env.NODE_ENV !== 'production') { %>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+      <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
+      <!-- Speeds up the dev process, less compiling -->
+    <% } else { %>
+      <!-- uncomment bootstrap line in index.scss for production mode -->
+    <% } %>
+    <link rel='stylesheet' href='bundle/main.css' />
+  </head>
+
+  <body>
+    <div class="page404">
+      <h1>Er is iets misgegaan</h1>
+      <h2><%= error.status %> - <%= error.message %></h2>
+      <pre><%= error.stack %></pre>
+
+      <a href="/" class="d-flex justify-content-center">
+        <button type="button" class="btn btn-lg btn-outline-secondary">Home</button>
+      </a>
+
+    </div>
+  </body>
+
+</html>
+
+

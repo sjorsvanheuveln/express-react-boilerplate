@@ -34,3 +34,24 @@ body {
 	border: 20px;
 	color: pink;
 }
+
+.page404 {
+  margin-top: 30px;
+  h1, h2, a {
+    text-align: center;
+  }
+  h1 {
+    font-size: 5rem;
+    text-decoration: underline;
+  }
+  pre {
+    padding: 30px;
+  }
+  a {
+    text-decoration: none;
+  }
+  
+  // color: var(--text);
+  // background-color: variables.$bg;
+  // text-align: center;
+}
