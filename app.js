@@ -44,12 +44,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('express-session')({
+  secret: 'ramdom asdfjkjasdf',
+  resave: false,
+  saveUnitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
 app.use('/api', apiRouter);
-app.use('/api', authRouter);
+app.use('/api/authentication', authRouter);
 app.use('/*', indexRouter); // this needs some new errorhandling 5MR-31
 
 // Config Passport
