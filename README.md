@@ -76,6 +76,7 @@ purging figured out yet. But perhaps I don't need to know that now.
 ### 20 May: Continued after Lazy ###
 1. Fixed bootstrap/css hotreloading + found a workable quick setup for dev and css quick compiling
 2. Reactstrap only works with bootstrap 4. -> not bad, just for dev purposes!
+3. Added 2FA for github. Now need to use personal access tokens.
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.
