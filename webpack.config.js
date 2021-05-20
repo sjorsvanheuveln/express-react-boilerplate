@@ -20,8 +20,8 @@ module.exports = {
   ],
 
   output: {
-    path: resolve(__dirname, 'public/javascripts'),
-    publicPath: '/javascripts/',
+    path: resolve(__dirname, 'public/bundle'),
+    publicPath: '/bundle/',
   },
 
   module: {
@@ -32,7 +32,12 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `$env: test;`, // get the node env in sass
+            },
+          },
         ],
       },
       {
@@ -46,7 +51,7 @@ module.exports = {
   },
 
   plugins: [
-    new MiniCssExtractPlugin({ filename: '../stylesheets/main.css' }),
+    new MiniCssExtractPlugin(),
   ],
 
   resolve: {
