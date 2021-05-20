@@ -1,17 +1,15 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import TestComponent from './TestComponent';
-import ProfilePage from './ProfilePage';
-import Navbar from './Navbar';
-// import Header from './Header';
+import LoginPage from './account/LoginPage';
+import HomePage from './home/HomePage';
+import Header from './shared/Header';
 
 const App = () => (
   <Router>
-    <Navbar />
-    {/*<Header />*/}
-    <div style={{ paddingTop: '10px' }}>
-      <Route exact path="/"><TestComponent text="test the reactness" /></Route>
-      <Route path="/profile"><ProfilePage username="Sjors" /></Route>
-    </div>
+    <Header />
+    <section className="p-3">
+      <Route exact path="/"><HomePage /></Route>
+      <Route path="/account/login"><LoginPage username="Sjors" /></Route>
+    </section>
   </Router>
 );
 
