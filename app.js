@@ -1,9 +1,14 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
+// User Datbase & Auth
 const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 // HOT RELOADING ////////////////////////////////////////////
 const webpack = require('webpack');
@@ -12,7 +17,9 @@ const compiler = webpack(webpackConfig);
 // //////////////////////////////////////////////////////////
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/api/users');
+const apiRouter = require('./routes/api');
+const authRouter = require('./routes/api/authentication');
 
 const app = express();
 
@@ -32,15 +39,24 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(require('webpack-hot-middleware')(compiler));
 }
 // /////////////////////////
-
+app.use(favicon(path.join(__dirname, 'public/images/favicon/favicon.ico')));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes
 app.use('/users', usersRouter);
+app.use('/api', apiRouter);
+app.use('/api', authRouter);
 app.use('/*', indexRouter); // this needs some new errorhandling 5MR-31
+
+// Config Passport
+const User = require('./models/user');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -48,7 +64,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

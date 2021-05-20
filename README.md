@@ -40,6 +40,7 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
   b. Is anti-bug/testing kind of thing. Let's ignore it for now.
 2. React Router can't reload pages where a nested route doesn't exist.
   -> /account/login won't be reloaded as /account doesn't exist.
+3. How to combine Passport strategies.
 
 ## Log ##
 ### 13 May: HMR Breakthrough ###
@@ -77,6 +78,7 @@ purging figured out yet. But perhaps I don't need to know that now.
 1. Fixed bootstrap/css hotreloading + found a workable quick setup for dev and css quick compiling
 2. Reactstrap only works with bootstrap 4. -> not bad, just for dev purposes!
 3. Added 2FA for github. Now need to use personal access tokens.
+  -> No password required no more.
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.
