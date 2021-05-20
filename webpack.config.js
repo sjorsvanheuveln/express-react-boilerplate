@@ -32,12 +32,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              additionalData: `$env: test;`, // get the node env in sass
-            },
-          },
+          'sass-loader'
         ],
       },
       {

@@ -5,11 +5,13 @@ import Header from './shared/Header';
 
 const App = () => (
   <Router>
-    <Header />
-    <section className="p-3">
-      <Route exact path="/"><HomePage /></Route>
-      <Route path="/account/login"><LoginPage username="Sjors" /></Route>
-    </section>
+    <div className="wrapper">
+      <Header />
+      <section className="p-3">
+        <Route exact path="/"><HomePage /></Route>
+        <Route path="/account/login"><LoginPage username="Sjors" /></Route>
+      </section>
+    </div>
   </Router>
 );
 
