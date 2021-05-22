@@ -9,9 +9,11 @@ export default function Counter() {
   return (
     <div className="mt-3">
       <h3>Counter</h3>
-      <Button type="button" onClick={() => dispatch(increment())}>+</Button>
-      <Button type="button" onClick={() => dispatch(decrement())}>-</Button>
-      <Button type="button" onClick={() => dispatch(incrementByAmount(5))}>+5</Button>
+      <div className="row">
+        <Button type="button" onClick={() => dispatch(increment())}>+</Button>
+        <Button type="button" onClick={() => dispatch(decrement())}>-</Button>
+        <Button type="button" onClick={() => dispatch(incrementByAmount(5))}>+5</Button>
+      </div>
       <p>Amount: {count}</p>
     </div>
   );

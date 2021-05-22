@@ -33,6 +33,7 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 ## To Do ##
 * How to setup Redux@latest
 * Expand Passport to Socials
+* Finally remove redux-logger?
 
 ## Questions ##
 1. React now demands proptypes to check props. Is this necessary?
