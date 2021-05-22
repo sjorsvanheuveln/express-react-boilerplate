@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { on, off } from '../../redux/progress';
+import { loginAttempt, loginFailure, loginSuccess } from '../../redux/auth';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class LoginPage extends React.Component {
@@ -12,6 +14,7 @@ class LoginPage extends React.Component {
       username: 'drFreeze',
       password: '21million',
       status: 'unknown',
+      redirect: false,
     };
 
     this.attemptLogin = this.attemptLogin.bind(this);
@@ -30,10 +33,18 @@ class LoginPage extends React.Component {
   async attemptLogin() {
     const { username, password } = this.state;
     const userData = { username, password };
-    const { on: progressOn, off: progressOff } = this.props;
+    const {
+      progressOn,
+      progressOff,
+      loginAttemptAction,
+      loginFailureAction,
+      loginSuccessAction,
+    } = this.props;
 
     progressOn();
-    const loginResponse = await fetch(
+    loginAttemptAction();
+
+    await fetch(
       'api/authentication/login',
       {
         method: 'POST',
@@ -43,24 +54,40 @@ class LoginPage extends React.Component {
         },
         credentials: 'same-origin',
       },
-    );
+    ).then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+      return null;
+    }).then((json) => {
+      if (json) {
+        console.log('logged in', json);
+        loginSuccessAction(json);
+        this.setState({ redirect: true });
+      } else {
+        loginFailureAction();
+      }
+    }).catch(() => {
+      loginFailureAction();
+    });
 
-    console.log('attempt', loginResponse);
-    this.setState({ status: loginResponse.status === 200 ? 'Success' : 'Failed' });
+    // this.setState({ status: loginResponse.status === 200 ? 'Success' : 'Failed' });
     progressOff();
   }
 
   render() {
     const { progress } = this.props;
-    const { username, password, status } = this.state;
+    const { username, password, status, redirect } = this.state;
     const responseColor = status === 'Success' ? 'green' : 'red';
+
+    if (redirect) { return (<Redirect to="/" />); }
 
     return (
       <div>
         <div className="row justify-content-center">
           <div className="col-10 col-sm-7 col-md-5 col-lg-4">
             <h1>Login Page</h1>
-            <p>This is the login page, {username}.</p>
+            <p>This is the login page.</p>
             <Form>
               <FormGroup>
                 <Label for="exampleEmail">Email</Label>
@@ -112,6 +139,12 @@ class LoginPage extends React.Component {
 }
 
 const mapStateToProps = (state) => (state.progress);
-const mapDispatchToProps = { on, off };
+const mapDispatchToProps = {
+  progressOn: on,
+  progressOff: off,
+  loginAttemptAction: loginAttempt,
+  loginFailureAction: loginFailure,
+  loginSuccessAction: loginSuccess,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

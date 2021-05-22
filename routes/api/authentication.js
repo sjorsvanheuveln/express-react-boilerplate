@@ -19,6 +19,7 @@ router.post('/register', (req, res) => {
 // Post to login
 router.post('/login', async (req, res) => {
   console.log('login', req.body);
+  console.log('again', req.user);
   const query = User.findOne({ username: req.body.username });
   const foundUser = await query.exec();
 

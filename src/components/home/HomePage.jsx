@@ -1,9 +1,21 @@
+import { useSelector } from 'react-redux';
 import { Button } from 'reactstrap';
 import Counter from '../TestComponent';
 
-const HomePage = () => (
-  <div className="row justify-content-center">
-    <div className="col-10 col-sm-7 col-md-5 col-lg-4">
+function Content() {
+  const { username, isLoggedIn } = useSelector((state) => state.auth);
+
+  if (isLoggedIn) {
+    return (
+      <div>
+        <h1>Welcome back</h1>
+        <p>You&lsquo;re now logged in, {username}.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
       <h1>Home Page</h1>
       <p>Hier is de home pagina</p>
       <p id="redTarget">Red target</p>
@@ -12,7 +24,15 @@ const HomePage = () => (
       </a>
       <Counter />
     </div>
-  </div>
-);
+  );
+}
 
-export default HomePage;
+export default function HomePage() {
+  return (
+    <div className="row justify-content-center">
+      <div className="col-10 col-sm-7 col-md-5 col-lg-4">
+        <Content />
+      </div>
+    </div>
+  );
+}
