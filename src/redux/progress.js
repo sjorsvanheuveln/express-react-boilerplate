@@ -4,15 +4,15 @@ import { createSlice } from '@reduxjs/toolkit';
 export const progressSlice = createSlice({
   name: 'progress',
   initialState: {
-    status: false,
+    progress: 0,
   },
   reducers: {
     // increment is an action
     on: (state) => {
-      state.status = true;
+      state.progress += 1;
     },
     off: (state) => {
-      state.status = false;
+      state.progress -= 1;
     },
   },
 });

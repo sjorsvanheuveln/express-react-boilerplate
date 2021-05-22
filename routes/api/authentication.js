@@ -4,10 +4,7 @@ const User = require('../../models/user');
 
 const router = express.Router();
 
-router.get('/register', (req, res) => {
-  res.json({ data: 'Registration Page' });
-});
-
+// Post to register
 router.post('/register', (req, res) => {
   const newUser = new User(req.body);
 
@@ -19,8 +16,16 @@ router.post('/register', (req, res) => {
   });
 });
 
-router.post('/login', (req, res) => {
+// Post to login
+router.post('/login', async (req, res) => {
   console.log('login', req.body);
+  const query = User.findOne({ username: req.body.username });
+  const foundUser = await query.exec();
+
+  if (foundUser) {
+    req.body.username = foundUser.username;
+  }
+
   passport.authenticate('local')(req, res, () => {
     if (req.user) {
       console.log('req.user', req.user);

@@ -4,6 +4,7 @@ import { increment, decrement, incrementByAmount } from '../redux/counter';
 
 export default function Counter() {
   const { count } = useSelector((state) => state.counter);
+  const { progress } = useSelector((state) => state.progress);
   const dispatch = useDispatch();
 
   return (
@@ -15,6 +16,7 @@ export default function Counter() {
         <Button type="button" onClick={() => dispatch(incrementByAmount(5))}>+5</Button>
       </div>
       <p>Amount: {count}</p>
+      <p>Progress: {progress}</p>
     </div>
   );
 }
