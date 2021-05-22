@@ -9,6 +9,7 @@
     "build-dev": "NODE_ENV=development webpack"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
     "bootstrap": "^5.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -23,6 +24,7 @@
     "passport-local-mongoose": "^6.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "reactstrap": "^8.9.0",
     "serve-favicon": "^2.5.0"

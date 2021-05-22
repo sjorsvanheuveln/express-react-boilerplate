@@ -32,7 +32,7 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 
 ## To Do ##
 * How to setup Redux@latest
-* Passport setup tutorial
+* Expand Passport to Socials
 
 ## Questions ##
 1. React now demands proptypes to check props. Is this necessary?
@@ -80,12 +80,11 @@ purging figured out yet. But perhaps I don't need to know that now.
 3. Added 2FA for github. Now need to use personal access tokens.
   -> No password required no more.
 4. Implemented login stuff.
+5. Error Page handling.
+
+### 22 May: Work = Great ###
+
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.
 
-
-
-
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
