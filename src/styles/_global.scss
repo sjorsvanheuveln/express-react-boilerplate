@@ -1,4 +1,5 @@
 @use "variables";
+@use "spinner";
 
 body {
 	// font-family: Futura;
@@ -50,6 +51,8 @@ body {
   a {
     text-decoration: none;
   }
+
+
   
   // color: var(--text);
   // background-color: variables.$bg;
