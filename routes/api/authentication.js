@@ -4,6 +4,14 @@ const User = require('../../models/user');
 
 const router = express.Router();
 
+// Get ot /checksession
+router.get('/checksession', (req, res) => {
+  if (req.user) {
+    return res.send(JSON.stringify(req.user));
+  }
+  return res.send(JSON.stringify({}));
+});
+
 // Post to register
 router.post('/register', (req, res) => {
   const newUser = new User(req.body);
@@ -18,8 +26,8 @@ router.post('/register', (req, res) => {
 
 // Post to login
 router.post('/login', async (req, res) => {
-  console.log('login', req.body);
-  console.log('again', req.user);
+  // console.log('login', req.body);
+  // console.log('again', req.user);
   const query = User.findOne({ username: req.body.username });
   const foundUser = await query.exec();
 

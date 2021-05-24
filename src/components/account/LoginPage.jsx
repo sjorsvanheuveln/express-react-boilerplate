@@ -61,7 +61,7 @@ class LoginPage extends React.Component {
       return null;
     }).then((json) => {
       if (json) {
-        console.log('logged in', json);
+        // console.log('logged in', json);
         loginSuccessAction(json);
         this.setState({ redirect: true });
       } else {

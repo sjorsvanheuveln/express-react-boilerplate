@@ -31,9 +31,9 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
   -> Local is a login strategy based on email & password from the local database.
 
 ## To Do ##
-* How to setup Redux@latest
 * Expand Passport to Socials
 * Finally remove redux-logger?
+* Fix database duplicates and security.
 
 ## Questions ##
 1. React now demands proptypes to check props. Is this necessary?
@@ -42,6 +42,7 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 2. React Router can't reload pages where a nested route doesn't exist.
   -> /account/login won't be reloaded as /account doesn't exist.
 3. How to combine Passport strategies.
+4. 
 
 ## Log ##
 ### 13 May: HMR Breakthrough ###
@@ -84,7 +85,17 @@ purging figured out yet. But perhaps I don't need to know that now.
 5. Error Page handling.
 
 ### 22 May: Work = Great ###
+Just start and it will flow!
+Did a lot of login stuff and most of it I understand.
 
+### 24 May: ... ###
+1. Is it ok to return salts and hashes?
+  a. Why is the password not send back by default (what controls that?)
+2. Session needs to persist a log in user.
+
+To Do: 
+1. Dry the auth slice.
+2. 
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.
