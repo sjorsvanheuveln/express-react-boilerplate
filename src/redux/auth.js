@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
   firstName: '',
@@ -19,19 +19,45 @@ function loginState(state, action) {
   state.username = action.payload.username;
 }
 
+export const login = createAsyncThunk(
+  'auth/login',
+  (userData) => {
+    // const userData = { username: 'test', password: 'test' };
+
+    return fetch(
+      'api/authentication/login',
+      {
+        method: 'POST',
+        body: JSON.stringify(userData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin',
+      },
+    ).then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    }).then((json) => json);
+  },
+);
+
 /* eslint no-param-reassign: 0 */
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     // increment is an action
-    loginAttempt: (state) => { state.isLoggingIn = true; },
-    loginFailure: () => initialState,
-    loginSuccess: (state, action) => loginState(state, action),
     logoutFailure: (state) => state,
     logoutSuccess: () => initialState,
     sessionCheckFailure: () => initialState,
     sessionCheckSuccess: (state, action) => loginState(state, action),
+  },
+  extraReducers: {
+    [login.pending]: (state) => { state.isLoggingIn = true; },
+    [login.rejected]: () => initialState,
+    [login.fulfilled]: (state, action) => loginState(state, action),
   },
 });
 

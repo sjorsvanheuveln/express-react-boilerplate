@@ -3,10 +3,10 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { on, off } from '../../redux/progress';
-import { loginAttempt, loginFailure, loginSuccess } from '../../redux/auth';
+import { login } from '../../redux/auth';
 
 // eslint-disable-next-line react/prefer-stateless-function
-class LoginPage extends React.Component {
+export class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,49 +30,12 @@ class LoginPage extends React.Component {
     this.setState({ password: e.target.value });
   }
 
-  async attemptLogin() {
+  attemptLogin() {
+    const { dispatch } = this.props;
     const { username, password } = this.state;
     const userData = { username, password };
-    const {
-      progressOn,
-      progressOff,
-      loginAttemptAction,
-      loginFailureAction,
-      loginSuccessAction,
-    } = this.props;
-
-    progressOn();
-    loginAttemptAction();
-
-    await fetch(
-      'api/authentication/login',
-      {
-        method: 'POST',
-        body: JSON.stringify(userData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'same-origin',
-      },
-    ).then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      }
-      return null;
-    }).then((json) => {
-      if (json) {
-        // console.log('logged in', json);
-        loginSuccessAction(json);
-        this.setState({ redirect: true });
-      } else {
-        loginFailureAction();
-      }
-    }).catch(() => {
-      loginFailureAction();
-    });
-
-    // this.setState({ status: loginResponse.status === 200 ? 'Success' : 'Failed' });
-    progressOff();
+    dispatch(login(userData));
+    this.setState({ status: 'newlogin' });
   }
 
   render() {
@@ -131,6 +94,7 @@ class LoginPage extends React.Component {
           <div className="col-10 col-sm-7 col-md-5 col-lg-4">
             <p>Progress: <b>{progress}</b></p>
           </div>
+          <Button outline onClick={this.attemptLogin}>Thunk</Button>
         </div>
 
       </div>
@@ -139,12 +103,7 @@ class LoginPage extends React.Component {
 }
 
 const mapStateToProps = (state) => (state.progress);
-const mapDispatchToProps = {
-  progressOn: on,
-  progressOff: off,
-  loginAttemptAction: loginAttempt,
-  loginFailureAction: loginFailure,
-  loginSuccessAction: loginSuccess,
-};
+// can I get rid of the whole mappingState things using useState()
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+
+export default connect(mapStateToProps)(LoginPage);

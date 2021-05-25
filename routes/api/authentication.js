@@ -4,6 +4,16 @@ const User = require('../../models/user');
 
 const router = express.Router();
 
+function passportLogin(req, res) {
+  passport.authenticate('local')(req, res, () => {
+    if (req.user) {
+      console.log('req.user', req.user);
+      return res.send(JSON.stringify(req.user));
+    }
+    return res.send(JSON.stringify({ error: 'There was an error logging in.' }));
+  });
+}
+
 // Get ot /checksession
 router.get('/checksession', (req, res) => {
   if (req.user) {
@@ -16,11 +26,13 @@ router.get('/checksession', (req, res) => {
 router.post('/register', (req, res) => {
   const newUser = new User(req.body);
 
-  User.register(newUser, req.body.password, (err, user) => {
+  User.register(newUser, req.body.password, (err) => {
     if (err) {
       return res.send(JSON.stringify({ error: err }));
     }
-    return res.send(JSON.stringify(user));
+
+    // log user in if no errors
+    return passportLogin(req, res);
   });
 });
 
@@ -34,14 +46,7 @@ router.post('/login', async (req, res) => {
   if (foundUser) {
     req.body.username = foundUser.username;
   }
-
-  passport.authenticate('local')(req, res, () => {
-    if (req.user) {
-      console.log('req.user', req.user);
-      return res.send(JSON.stringify(req.user));
-    }
-    return res.send(JSON.stringify({ error: 'There was an error logging in.' }));
-  });
+  return passportLogin(req, res);
 });
 
 router.get('/logout', (req, res) => {

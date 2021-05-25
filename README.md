@@ -93,9 +93,17 @@ Did a lot of login stuff and most of it I understand.
   a. Why is the password not send back by default (what controls that?)
 2. Session needs to persist a log in user.
 
-To Do: 
-1. Dry the auth slice.
-2. 
+### 24 May: ... ###
+1. Dry the auth slice and refactor.
+I shouldn't copy code again. I should try to understand it and build it my way.
+Maybe nuke the shit out of it. And do it your way!
+
+TO DOs:
+
+1. Check the error handlers.
+2. Refactor the auth stuff in the components!
+  -> preferably move it to the redux files
+
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.

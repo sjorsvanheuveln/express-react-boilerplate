@@ -35,6 +35,9 @@ export default function Header(props) {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
+            <NavLink tag={Link} to="/register">Register</NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink tag={Link} to="/profile">Profile</NavLink>
           </NavItem>
           <NavItem>
