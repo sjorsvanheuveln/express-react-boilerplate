@@ -21,26 +21,37 @@ function loginState(state, action) {
 
 export const login = createAsyncThunk(
   'auth/login',
-  (userData) => {
-    // const userData = { username: 'test', password: 'test' };
-
-    return fetch(
-      'api/authentication/login',
-      {
-        method: 'POST',
-        body: JSON.stringify(userData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'same-origin',
+  (userData) => fetch(
+    'api/authentication/login',
+    {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json',
       },
-    ).then((response) => {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      return response.json();
-    }).then((json) => json);
-  },
+      credentials: 'same-origin',
+    },
+  ).then((response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response.json();
+  }).then((json) => json),
+);
+
+export const logout = createAsyncThunk(
+  'auth/logout', () => fetch(
+    'api/authentication/logout',
+    {
+      method: 'GET',
+      credentials: 'same-origin',
+    },
+  ).then((response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response.json();
+  }).then((json) => json),
 );
 
 /* eslint no-param-reassign: 0 */
@@ -58,6 +69,9 @@ export const authSlice = createSlice({
     [login.pending]: (state) => { state.isLoggingIn = true; },
     [login.rejected]: () => initialState,
     [login.fulfilled]: (state, action) => loginState(state, action),
+    [logout.pending]: () => console.log('trigger pending'),
+    [logout.rejected]: (state) => state,
+    [logout.fulfilled]: () => initialState,
   },
 });
 

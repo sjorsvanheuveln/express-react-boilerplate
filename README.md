@@ -93,16 +93,12 @@ Did a lot of login stuff and most of it I understand.
   a. Why is the password not send back by default (what controls that?)
 2. Session needs to persist a log in user.
 
-### 24 May: ... ###
-1. Dry the auth slice and refactor.
-I shouldn't copy code again. I should try to understand it and build it my way.
-Maybe nuke the shit out of it. And do it your way!
+### 25 May: PUSH ###
+I always think I'm not gonna figure it out. But I should assume things are possible and I could understand them. Today I was able to apply my own login-redux setup through redux-thunks. Took a while, but now it's working the way I want it. I continue the road for understandable, readable DRY code.
 
-TO DOs:
-
-1. Check the error handlers.
-2. Refactor the auth stuff in the components!
-  -> preferably move it to the redux files
+1. Check and experiment with the error handlers.
+2. Refactor logout to the slice file!
+3. Are React.components refactorable to useState functionalities?
 
 
 ## Epiphanies ##

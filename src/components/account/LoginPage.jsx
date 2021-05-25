@@ -2,11 +2,11 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { on, off } from '../../redux/progress';
+// import { on, off } from '../../redux/progress';
 import { login } from '../../redux/auth';
 
 // eslint-disable-next-line react/prefer-stateless-function
-export class LoginPage extends React.Component {
+class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -104,6 +104,5 @@ export class LoginPage extends React.Component {
 
 const mapStateToProps = (state) => (state.progress);
 // can I get rid of the whole mappingState things using useState()
-
 
 export default connect(mapStateToProps)(LoginPage);

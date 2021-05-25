@@ -6,13 +6,14 @@ import RegisterPage from './account/RegisterPage';
 import ProfilePage from './account/ProfilePage';
 import HomePage from './home/HomePage';
 import Header from './shared/Header';
-import { sessionCheckSuccess, sessionCheckFailure, logoutSuccess } from '../redux/auth';
+import { sessionCheckSuccess, sessionCheckFailure, logout } from '../redux/auth';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.checkSession = this.checkSession.bind(this);
-    this.logUserOut = this.logout.bind(this);
+    this.attemptLogout = this.attemptLogout.bind(this);
   }
 
   componentDidMount() {
@@ -20,8 +21,7 @@ class App extends React.Component {
   }
 
   async checkSession() {
-    const { sessionCheckSuccessAction, sessionCheckFailureAction } = this.props;
-
+    const { dispatch } = this.props;
     await fetch(
       'api/authentication/checksession',
       {
@@ -35,31 +35,18 @@ class App extends React.Component {
       return null;
     }).then((json) => {
       if (json.username) {
-        sessionCheckSuccessAction(json);
+        dispatch(sessionCheckSuccess(json));
       } else {
-        sessionCheckFailureAction();
+        dispatch(sessionCheckFailure());
       }
     }).catch((err) => {
-      sessionCheckFailureAction(err);
+      dispatch(sessionCheckFailure(err));
     });
   }
 
-  async logout() {
-    const { logoutSuccessAction } = this.props;
-    await fetch(
-      'api/authentication/logout',
-      {
-        method: 'GET',
-        credentials: 'same-origin',
-      },
-    ).then((res) => {
-      if (res.status === 200) {
-        return logoutSuccessAction();
-      }
-      return null;
-    }).catch((err) => {
-      console.log(err);
-    });
+  attemptLogout() {
+    const { dispatch } = this.props;
+    dispatch(logout());
   }
 
   render() {
@@ -69,7 +56,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="wrapper">
-          <Header isLoggedIn={isLoggedIn} username={username} logUserOut={this.logUserOut} />
+          <Header isLoggedIn={isLoggedIn} username={username} logUserOut={this.attemptLogout} />
           <section className="p-3">
             <Route exact path="/"><HomePage /></Route>
             <Route path="/login"><LoginPage /></Route>
@@ -88,10 +75,5 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({ progress: state.progress, auth: state.auth });
-const mapDispatchToProps = {
-  sessionCheckSuccessAction: sessionCheckSuccess,
-  sessionCheckFailureAction: sessionCheckFailure,
-  logoutSuccessAction: logoutSuccess,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
