@@ -6,42 +6,18 @@ import RegisterPage from './account/RegisterPage';
 import ProfilePage from './account/ProfilePage';
 import HomePage from './home/HomePage';
 import Header from './shared/Header';
-import { sessionCheckSuccess, sessionCheckFailure, logout } from '../redux/auth';
+import { checkSession, logout } from '../redux/auth';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.checkSession = this.checkSession.bind(this);
     this.attemptLogout = this.attemptLogout.bind(this);
   }
 
   componentDidMount() {
-    this.checkSession();
-  }
-
-  async checkSession() {
     const { dispatch } = this.props;
-    await fetch(
-      'api/authentication/checksession',
-      {
-        method: 'GET',
-        credentials: 'same-origin',
-      },
-    ).then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      }
-      return null;
-    }).then((json) => {
-      if (json.username) {
-        dispatch(sessionCheckSuccess(json));
-      } else {
-        dispatch(sessionCheckFailure());
-      }
-    }).catch((err) => {
-      dispatch(sessionCheckFailure(err));
-    });
+    dispatch(checkSession());
   }
 
   attemptLogout() {

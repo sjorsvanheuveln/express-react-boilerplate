@@ -54,24 +54,35 @@ export const logout = createAsyncThunk(
   }).then((json) => json),
 );
 
+export const checkSession = createAsyncThunk(
+  'auth/checkSession', () => fetch(
+    'api/authentication/checksession',
+    {
+      method: 'GET',
+      credentials: 'same-origin',
+    },
+  ).then((response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response.json();
+  }).then((json) => json),
+);
+
 /* eslint no-param-reassign: 0 */
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // increment is an action
-    logoutFailure: (state) => state,
-    logoutSuccess: () => initialState,
-    sessionCheckFailure: () => initialState,
-    sessionCheckSuccess: (state, action) => loginState(state, action),
   },
   extraReducers: {
     [login.pending]: (state) => { state.isLoggingIn = true; },
     [login.rejected]: () => initialState,
     [login.fulfilled]: (state, action) => loginState(state, action),
-    [logout.pending]: () => console.log('trigger pending'),
     [logout.rejected]: (state) => state,
     [logout.fulfilled]: () => initialState,
+    [checkSession.rejected]: () => initialState,
+    [checkSession.fulfilled]: (state, action) => loginState(state, action),
   },
 });
 
