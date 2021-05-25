@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { off, on } from './progress';
 
 const initialState = {
   firstName: '',
@@ -21,22 +22,28 @@ function loginState(state, action) {
 
 export const login = createAsyncThunk(
   'auth/login',
-  (userData) => fetch(
-    'api/authentication/login',
-    {
-      method: 'POST',
-      body: JSON.stringify(userData),
-      headers: {
-        'Content-Type': 'application/json',
+  (userData, { dispatch }) => {
+    dispatch(on());
+    const responseObject = fetch(
+      'api/authentication/login',
+      {
+        method: 'POST',
+        body: JSON.stringify(userData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin',
       },
-      credentials: 'same-origin',
-    },
-  ).then((response) => {
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-    return response.json();
-  }).then((json) => json),
+    ).then((response) => {
+      dispatch(off());
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    });
+    console.log('thunk login', responseObject);
+    return responseObject;
+  },
 );
 
 export const logout = createAsyncThunk(

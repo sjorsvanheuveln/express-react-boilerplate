@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { on, off } from '../../redux/progress';
 import { login } from '../../redux/auth';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -34,8 +34,10 @@ class LoginPage extends React.Component {
     const { dispatch } = this.props;
     const { username, password } = this.state;
     const userData = { username, password };
-    dispatch(login(userData));
-    this.setState({ status: 'newlogin' });
+    dispatch(login(userData)).then(unwrapResult)
+      .then((result) => {
+        if (result.firstName) { this.setState({ redirect: true }); }
+      });
   }
 
   render() {
@@ -94,7 +96,6 @@ class LoginPage extends React.Component {
           <div className="col-10 col-sm-7 col-md-5 col-lg-4">
             <p>Progress: <b>{progress}</b></p>
           </div>
-          <Button outline onClick={this.attemptLogin}>Thunk</Button>
         </div>
 
       </div>
