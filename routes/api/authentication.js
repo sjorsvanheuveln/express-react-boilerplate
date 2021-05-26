@@ -7,7 +7,7 @@ const router = express.Router();
 function passportLogin(req, res) {
   passport.authenticate('local')(req, res, () => {
     if (req.user) {
-      console.log('req.user', req.user);
+      console.log('passport login, req.user:', req.user);
       return res.send(JSON.stringify(req.user));
     }
     return res.send(JSON.stringify({ error: 'There was an error logging in.' }));
@@ -24,6 +24,7 @@ router.get('/checksession', (req, res) => {
 
 // Post to register
 router.post('/register', (req, res) => {
+  console.log('register backend', req.body);
   const newUser = new User(req.body);
 
   User.register(newUser, req.body.password, (err) => {

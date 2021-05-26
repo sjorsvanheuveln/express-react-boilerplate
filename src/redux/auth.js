@@ -8,6 +8,7 @@ const initialState = {
   isLoggingIn: false,
   lastName: '',
   username: '',
+  registrationSucceeded: false,
 };
 
 function loginState(state, action) {
@@ -20,11 +21,35 @@ function loginState(state, action) {
   state.username = action.payload.username;
 }
 
+export const register = createAsyncThunk(
+  'auth/register',
+  (userData, { dispatch }) => {
+    dispatch(on());
+    return fetch(
+      'api/authentication/register',
+      {
+        method: 'POST',
+        body: JSON.stringify(userData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin',
+      },
+    ).then((response) => {
+      dispatch(off());
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    });
+  },
+);
+
 export const login = createAsyncThunk(
   'auth/login',
   (userData, { dispatch }) => {
     dispatch(on());
-    const responseObject = fetch(
+    return fetch(
       'api/authentication/login',
       {
         method: 'POST',
@@ -41,8 +66,6 @@ export const login = createAsyncThunk(
       }
       return response.json();
     });
-    console.log('thunk login', responseObject);
-    return responseObject;
   },
 );
 
@@ -83,6 +106,11 @@ export const authSlice = createSlice({
   reducers: {
   },
   extraReducers: {
+    [register.rejected]: (state) => state,
+    [register.fulfilled]: (state, action) => {
+      loginState(state, action);
+      state.registrationSucceeded = true;
+    },
     [login.pending]: (state) => { state.isLoggingIn = true; },
     [login.rejected]: () => initialState,
     [login.fulfilled]: (state, action) => loginState(state, action),

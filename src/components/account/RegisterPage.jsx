@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
+import { register } from '../../redux/auth';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class LoginPage extends React.Component {
@@ -8,11 +9,11 @@ class LoginPage extends React.Component {
     super(props);
 
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      username: '',
-      password: '',
+      firstName: 'Satoshi',
+      lastName: 'Nakamoto',
+      email: 'info@satoshi.com',
+      username: 'satoshi',
+      password: 'nakamoto',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -32,7 +33,9 @@ class LoginPage extends React.Component {
   }
 
   attemptRegister() {
+    const { dispatch } = this.props;
     console.log('register', this.state);
+    dispatch(register(this.state));
   }
 
   render() {
@@ -115,7 +118,5 @@ class LoginPage extends React.Component {
 }
 
 const mapStateToProps = (state) => (state.progress);
-const mapDispatchToProps = {
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps)(LoginPage);

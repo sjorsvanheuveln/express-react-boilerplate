@@ -100,6 +100,13 @@ I always think I'm not gonna figure it out. But I should assume things are possi
 2. Refactor logout to the slice file!
 3. Are React.components refactorable to useState functionalities?
 
+### 25 May: Natural Resistance ###
+Always takes me time to start. But once I start it's good.
+
+to do:
+1. Registration error handling!
+  a. Incomplete data
+  b. Duplicates
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.
