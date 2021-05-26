@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoginPage from './account/LoginPage';
 import RegisterPage from './account/RegisterPage';
+import RegisterSuccessPage from './account/RegisterSuccessPage';
 import ProfilePage from './account/ProfilePage';
 import HomePage from './home/HomePage';
 import Header from './shared/Header';
@@ -37,6 +38,7 @@ class App extends React.Component {
             <Route exact path="/"><HomePage /></Route>
             <Route path="/login"><LoginPage /></Route>
             <Route path="/register"><RegisterPage /></Route>
+            <Route path="/register-success"><RegisterSuccessPage /></Route>
             <Route path="/profile"><ProfilePage /></Route>
           </section>
           <div className="loader-wrapper" style={{ display: progress.progress > 0 ? 'block' : 'none' }}>

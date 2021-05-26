@@ -102,11 +102,15 @@ I always think I'm not gonna figure it out. But I should assume things are possi
 
 ### 25 May: Natural Resistance ###
 Always takes me time to start. But once I start it's good.
+Build Registration Succes Page
+Checksession non-user login problem fixed.
 
 to do:
 1. Registration error handling!
   a. Incomplete data
   b. Duplicates
+  c. Already registered -> otherwise we have a bug now
+
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.

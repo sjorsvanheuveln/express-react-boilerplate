@@ -8,6 +8,7 @@ const initialState = {
   isLoggingIn: false,
   lastName: '',
   username: '',
+  email: '',
   registrationSucceeded: false,
 };
 
@@ -15,10 +16,12 @@ function loginState(state, action) {
   state.firstName = action.payload.firstName;
   // eslint-disable-next-line no-underscore-dangle
   state.id = action.payload._id;
+  // set login flag when user is defined for checksession!
   state.isLoggedIn = true;
   state.isLoggingIn = false;
   state.lastName = action.payload.lastName;
   state.username = action.payload.username;
+  state.email = action.payload.email;
 }
 
 export const register = createAsyncThunk(
@@ -104,6 +107,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    registrationSuccessViewed: (state) => { state.registrationSucceeded = false; },
   },
   extraReducers: {
     [register.rejected]: (state) => state,
@@ -117,18 +121,15 @@ export const authSlice = createSlice({
     [logout.rejected]: (state) => state,
     [logout.fulfilled]: () => initialState,
     [checkSession.rejected]: () => initialState,
-    [checkSession.fulfilled]: (state, action) => loginState(state, action),
+    [checkSession.fulfilled]: (state, action) => {
+      if (action.payload.username) { return loginState(state, action); }
+      return initialState;
+    },
   },
 });
 
 export const {
-  loginAttempt,
-  loginFailure,
-  loginSuccess,
-  logoutFailure,
-  logoutSuccess,
-  sessionCheckFailure,
-  sessionCheckSuccess,
+  registrationSuccessViewed,
 } = authSlice.actions;
 
 export default authSlice.reducer;

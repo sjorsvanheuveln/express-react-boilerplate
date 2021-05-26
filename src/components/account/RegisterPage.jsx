@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { register } from '../../redux/auth';
@@ -34,11 +35,21 @@ class LoginPage extends React.Component {
 
   attemptRegister() {
     const { dispatch } = this.props;
-    console.log('register', this.state);
     dispatch(register(this.state));
   }
 
   render() {
+    console.log('registrationpage', this.props);
+    const { isLoggedIn, registrationSucceeded } = this.props;
+
+    if (registrationSucceeded) {
+      return (<Redirect to="register-success" />);
+    }
+
+    if (isLoggedIn) {
+      return (<p>Please log out before registering a new user</p>);
+    }
+
     return (
       <div>
         <div className="row justify-content-center">
@@ -117,6 +128,7 @@ class LoginPage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => (state.progress);
+const mapStateToProps = (state) => (state.auth);
+// is this still needed?
 
 export default connect(mapStateToProps)(LoginPage);

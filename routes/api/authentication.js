@@ -7,7 +7,6 @@ const router = express.Router();
 function passportLogin(req, res) {
   passport.authenticate('local')(req, res, () => {
     if (req.user) {
-      console.log('passport login, req.user:', req.user);
       return res.send(JSON.stringify(req.user));
     }
     return res.send(JSON.stringify({ error: 'There was an error logging in.' }));
@@ -29,6 +28,7 @@ router.post('/register', (req, res) => {
 
   User.register(newUser, req.body.password, (err) => {
     if (err) {
+      console.log('register error', err);
       return res.send(JSON.stringify({ error: err }));
     }
 
