@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { off, on } from './progress';
+import { failure } from './error';
 
 const initialState = {
   firstName: '',
@@ -41,7 +42,7 @@ export const register = createAsyncThunk(
     ).then((response) => {
       dispatch(off());
       if (!response.ok) {
-        throw Error(response.statusText);
+        return dispatch(failure({ message: 'Registratie mislukt. Probeer opnieuws.' }));
       }
       return response.json();
     });
@@ -65,7 +66,7 @@ export const login = createAsyncThunk(
     ).then((response) => {
       dispatch(off());
       if (!response.ok) {
-        throw Error(response.statusText);
+        return dispatch(failure({ message: 'Email of Wachtwoord niet correct. Probeer opnieuw.' }));
       }
       return response.json();
     });
@@ -73,7 +74,7 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk(
-  'auth/logout', () => fetch(
+  'auth/logout', (dispatch) => fetch(
     'api/authentication/logout',
     {
       method: 'GET',
@@ -81,7 +82,7 @@ export const logout = createAsyncThunk(
     },
   ).then((response) => {
     if (!response.ok) {
-      throw Error(response.statusText);
+      return dispatch(failure({ message: 'Er ging iets mis met uitloggen. Probeer opnieuw.' }));
     }
     return response.json();
   }).then((json) => json),
@@ -117,7 +118,10 @@ export const authSlice = createSlice({
     },
     [login.pending]: (state) => { state.isLoggingIn = true; },
     [login.rejected]: () => initialState,
-    [login.fulfilled]: (state, action) => loginState(state, action),
+    [login.fulfilled]: (state, action) => {
+      if (action.payload.username) { return loginState(state, action); }
+      return initialState;
+    },
     [logout.rejected]: (state) => state,
     [logout.fulfilled]: () => initialState,
     [checkSession.rejected]: () => initialState,

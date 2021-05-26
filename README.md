@@ -110,6 +110,8 @@ to do:
   a. Incomplete data
   b. Duplicates
   c. Already registered -> otherwise we have a bug now
+2. There probably is a better way of handling errors with createAsync!!!
+  -> Yes, there should be!!!!
 
 
 ## Epiphanies ##

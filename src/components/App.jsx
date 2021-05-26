@@ -7,6 +7,7 @@ import RegisterSuccessPage from './account/RegisterSuccessPage';
 import ProfilePage from './account/ProfilePage';
 import HomePage from './home/HomePage';
 import Header from './shared/Header';
+import ErrorBox from './shared/ErrorBox';
 import { checkSession, logout } from '../redux/auth';
 
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
         <div className="wrapper">
           <Header isLoggedIn={isLoggedIn} username={username} logUserOut={this.attemptLogout} />
           <section className="p-3">
+            <ErrorBox />
             <Route exact path="/"><HomePage /></Route>
             <Route path="/login"><LoginPage /></Route>
             <Route path="/register"><RegisterPage /></Route>

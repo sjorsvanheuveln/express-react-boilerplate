@@ -3,6 +3,7 @@ import logger from 'redux-logger';
 import counterReducer from './counter';
 import progressReducer from './progress';
 import authReducer from './auth';
+import errorReducer from './error';
 
 function useLogger() {
   if (process.env.NODE_ENV !== 'production') {
@@ -16,6 +17,7 @@ export default configureStore({
     counter: counterReducer,
     progress: progressReducer,
     auth: authReducer,
+    error: errorReducer,
     // add new reducers here
   },
   middleware: useLogger(),
