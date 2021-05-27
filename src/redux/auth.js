@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { off, on } from './progress';
 import { failure } from './error';
 
@@ -24,30 +25,6 @@ function loginState(state, action) {
   state.username = action.payload.username;
   state.email = action.payload.email;
 }
-
-export const register = createAsyncThunk(
-  'auth/register',
-  (userData, { dispatch }) => {
-    dispatch(on());
-    return fetch(
-      'api/authentication/register',
-      {
-        method: 'POST',
-        body: JSON.stringify(userData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'same-origin',
-      },
-    ).then((response) => {
-      dispatch(off());
-      if (!response.ok) {
-        return dispatch(failure({ message: 'Registratie mislukt. Probeer opnieuws.' }));
-      }
-      return response.json();
-    });
-  },
-);
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -103,6 +80,35 @@ export const checkSession = createAsyncThunk(
   }).then((json) => json),
 );
 
+export const register = createAsyncThunk(
+  'auth/register',
+  (userData, { dispatch }) => fetch(
+    'api/authentication/register',
+    {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'same-origin',
+    },
+  ).then((response) => {
+    if (!response.ok) {
+      dispatch(failure({ message: 'DISPATCH: Registratie mislukt. Probeer opnieuw.' }));
+      throw Error('1. ERROR: Registratie mislukt. Probeer opnieuw.');
+    }
+    return response.json();
+  }).then((json) => {
+    console.log('json', json);
+    if (json.error) {
+      dispatch(failure({ message: json.error }));
+      throw Error(json.error);
+    }
+    return json;
+  }),
+
+);
+
 /* eslint no-param-reassign: 0 */
 export const authSlice = createSlice({
   name: 'auth',
@@ -111,10 +117,16 @@ export const authSlice = createSlice({
     registrationSuccessViewed: (state) => { state.registrationSucceeded = false; },
   },
   extraReducers: {
-    [register.rejected]: (state) => state,
+    [register.rejected]: (state, action) => {
+      console.log('REDUCER: reg rejected', action);
+      return state;
+    },
     [register.fulfilled]: (state, action) => {
-      loginState(state, action);
-      state.registrationSucceeded = true;
+      console.log('REDUCER reg fullfilled', action);
+      if (action.payload.username) {
+        loginState(state, action);
+        state.registrationSucceeded = true;
+      }
     },
     [login.pending]: (state) => { state.isLoggingIn = true; },
     [login.rejected]: () => initialState,

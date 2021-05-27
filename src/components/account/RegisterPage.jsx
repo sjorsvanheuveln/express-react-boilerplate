@@ -39,15 +39,15 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    console.log('registrationpage', this.props);
     const { isLoggedIn, registrationSucceeded } = this.props;
+    const { firstName, lastName, username, email, password } = this.state;
 
     if (registrationSucceeded) {
       return (<Redirect to="register-success" />);
     }
 
     if (isLoggedIn) {
-      return (<p>Please log out before registering a new user</p>);
+      return (<p>Log eerst uit voordat je een nieuwe user aanmaakt.</p>);
     }
 
     return (
@@ -58,67 +58,64 @@ class LoginPage extends React.Component {
             <p>This is the register page.</p>
             <hr />
 
-            <Form>
+            <Form onKeyPress={this.handleKeyPress}>
               <FormGroup>
-                <Label for="exampleEmail">First Name</Label>
+                <Label for="firstName">First Name</Label>
                 <Input
                   type="text"
                   name="firstName"
                   id="firstName"
                   placeholder="Satoshi"
-                  value={this.state.firstName}
+                  value={firstName}
                   onChange={this.handleInputChange}
-                  onKeyPress={this.handleKeyPress}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="exampleEmail">Last Name</Label>
+                <Label for="lastName">Last Name</Label>
                 <Input
                   type="text"
                   id="lastName"
                   placeholder="Nakamoto"
-                  value={this.state.lastName}
+                  value={lastName}
                   onChange={this.handleInputChange}
-                  onKeyPress={this.handleKeyPress}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="exampleEmail">Email</Label>
+                <Label for="email">Email</Label>
                 <Input
                   type="email"
                   name="email"
                   id="email"
                   placeholder="noreply@schoolofsatoshi.nl"
-                  value={this.state.email}
+                  value={email}
                   onChange={this.handleInputChange}
-                  onKeyPress={this.handleKeyPress}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="exampleEmail">Username</Label>
+                <Label for="username">Username</Label>
                 <Input
                   type="text"
                   name="username"
                   id="username"
                   placeholder="yourusername"
-                  value={this.state.username}
+                  value={username}
                   onChange={this.handleInputChange}
-                  onKeyPress={this.handleKeyPress}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="examplePassword">Password</Label>
+                <Label for="password">Password</Label>
                 <Input
                   type="password"
                   name="password"
                   id="password"
                   placeholder="password"
-                  value={this.state.password}
+                  value={password}
                   onChange={this.handleInputChange}
-                  onKeyPress={this.handleKeyPress}
                 />
               </FormGroup>
-              <Button outline onClick={this.attemptRegister}>Register</Button>
+
+              <Button color="primary" outline onClick={this.attemptRegister}>Register</Button>
+
             </Form>
           </div>
         </div>

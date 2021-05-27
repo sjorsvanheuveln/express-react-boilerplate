@@ -8,8 +8,9 @@ function Content() {
   if (isLoggedIn) {
     return (
       <div>
-        <h1>Welcome back</h1>
-        <p>You&lsquo;re now logged in, {username}.</p>
+        <h1>Welcome back, <b style={{ color: 'indigo' }}>{username}</b></h1>
+        <p>You&lsquo;re now logged in!</p>
+        <img src="/images/bitcoin_turn.gif" alt="bitcoin" />
       </div>
     );
   }

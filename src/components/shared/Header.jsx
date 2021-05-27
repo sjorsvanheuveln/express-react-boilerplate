@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 function handleLogin(isLoggedIn, username, logoutClick) {
   if (isLoggedIn) {
     return (
-      <div>
-        <NavbarText><b>{username}</b> | <a href="/" onClick={logoutClick}>Logout</a></NavbarText>
-      </div>
+      <>
+        <NavItem><NavLink className="pr-1" tag={Link} to="/profile"><b style={{ color: 'indigo' }}>{username}</b> | </NavLink></NavItem>
+        <NavItem><NavLink className="pl-0" tag={Link} to="/" onClick={logoutClick}>Logout</NavLink></NavItem>
+      </>
     );
   }
   return (<NavLink tag={Link} to="/login">Log In</NavLink>);
@@ -37,12 +38,7 @@ export default function Header(props) {
           <NavItem>
             <NavLink tag={Link} to="/register">Register</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink tag={Link} to="/profile">Profile</NavLink>
-          </NavItem>
-          <NavItem>
-            {handleLogin(isLoggedIn, username, logoutClick)}
-          </NavItem>
+            { handleLogin(isLoggedIn, username, logoutClick) }
         </Nav>
       </Collapse>
     </Navbar>

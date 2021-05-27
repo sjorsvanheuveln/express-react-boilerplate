@@ -16,19 +16,42 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 
 ## Lessons Learned ##
 1. Read the original documents for fixing HMR
-  i. https://github.com/webpack-contrib/webpack-hot-middleware
-  ii. important: publicPath: '/javascripts/',
+  * https://github.com/webpack-contrib/webpack-hot-middleware
+  * important: publicPath: '/javascripts/',
+
 2. Success can be just around the corner!
+
 3. Differense @use & @import in scss:
-    a. https://stackoverflow.com/questions/62757419/whats-the-difference-between-import-and-use-scss-rules
+  * https://stackoverflow.com/questions/62757419/whats-the-difference-between-import-and-use-scss-rules
+
 4. React Router:
-  a. exact path = '/' will only! render this component on this path
-  b. so /profile won't be e.g.
+  * exact path = '/' will only! render this component on this path
+  * so /profile won't be e.g.
+
 5. Css/Bootstrap
-  a. CSS is not being purged!
-  b. How to properly implement Bootstrap -> Read the Docs!
+  * CSS is not being purged!
+  * How to properly implement Bootstrap -> Read the Docs!
+
 6. Passport
-  -> Local is a login strategy based on email & password from the local database.
+  * Local is a login strategy based on email & password from the local database.
+
+7. Backend / Redux / createAsyncThunk / Error Handling:
+  a. [auth.extraReducer.rejected] 
+    * is triggered by: throw Error('your error message');
+    * this will attach and error object into action.error
+  b. response.ok = false can be triggered from the backend by:
+    * es.status(400/401/etc);
+  c. Basically the only thing that the backend does is returning objects!
+  d. The function used inside Async Thunk is the "payloadCreator"!
+    * Whatever is returned from that function is attached to action.payload
+      - Which doesn't have to be an object. But preferably
+  e. res.send(JSON.stringify({})) === res.json({})
+    though the type is set to HTML/text in send
+  f. Models 
+    * model.find: -> returns an empty array with no results
+    * model.findOne: -> returns null with no results
+
+
 
 ## To Do ##
 * Expand Passport to Socials
@@ -80,7 +103,7 @@ purging figured out yet. But perhaps I don't need to know that now.
 1. Fixed bootstrap/css hotreloading + found a workable quick setup for dev and css quick compiling
 2. Reactstrap only works with bootstrap 4. -> not bad, just for dev purposes!
 3. Added 2FA for github. Now need to use personal access tokens.
-  -> No password required no more.
+  * No password required no more.
 4. Implemented login stuff.
 5. Error Page handling.
 
@@ -90,7 +113,7 @@ Did a lot of login stuff and most of it I understand.
 
 ### 24 May: ... ###
 1. Is it ok to return salts and hashes?
-  a. Why is the password not send back by default (what controls that?)
+  * Why is the password not send back by default (what controls that?)
 2. Session needs to persist a log in user.
 
 ### 25 May: PUSH ###
@@ -100,10 +123,18 @@ I always think I'm not gonna figure it out. But I should assume things are possi
 2. Refactor logout to the slice file!
 3. Are React.components refactorable to useState functionalities?
 
-### 25 May: Natural Resistance ###
+### 26 May: Natural Resistance ###
 Always takes me time to start. But once I start it's good.
 Build Registration Succes Page
 Checksession non-user login problem fixed.
+
+### 27 May: Difficult ###
+I need to push on to understand this fucking redux async stuff.
+I should be able to figure it out!!!!
+It's difficult now!!! Keep struggling!
+IVO style photosynthese here we go!
+
+I could move the error dispatches to the rejected action.
 
 to do:
 1. Registration error handling!

@@ -35,7 +35,7 @@ class App extends React.Component {
       <Router>
         <div className="wrapper">
           <Header isLoggedIn={isLoggedIn} username={username} logUserOut={this.attemptLogout} />
-          <section className="p-3">
+          <section className="p-3 mt-4">
             <ErrorBox />
             <Route exact path="/"><HomePage /></Route>
             <Route path="/login"><LoginPage /></Route>

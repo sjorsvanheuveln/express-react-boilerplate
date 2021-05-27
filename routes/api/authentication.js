@@ -7,28 +7,34 @@ const router = express.Router();
 function passportLogin(req, res) {
   passport.authenticate('local')(req, res, () => {
     if (req.user) {
-      return res.send(JSON.stringify(req.user));
+      return res.json(req.user);
     }
-    return res.send(JSON.stringify({ error: 'There was an error logging in.' }));
+    return res.json({ error: 'There was an error logging in.' });
   });
 }
 
 // Get ot /checksession
 router.get('/checksession', (req, res) => {
   if (req.user) {
-    return res.send(JSON.stringify(req.user));
+    return res.json(req.user);
   }
-  return res.send(JSON.stringify({}));
+  return res.json({});
 });
 
 // Post to register
-router.post('/register', (req, res) => {
-  console.log('register backend', req.body);
+router.post('/register', async (req, res) => {
+  const query = User.findOne({ email: req.body.email });
+  const foundUser = await query.exec();
+
+  if (foundUser) {
+    return res.json({ error: 'BACKEND: Email of username bestaat al.' });
+  }
+
   const newUser = new User(req.body);
 
   User.register(newUser, req.body.password, (err) => {
     if (err) {
-      return res.send(JSON.stringify({ error: err }));
+      return res.json({ error: err });
     }
 
     // log user in if no errors
@@ -37,23 +43,11 @@ router.post('/register', (req, res) => {
 });
 
 // Post to login
-router.post('/login', async (req, res) => {
-  // console.log('login', req.body);
-  // console.log('again', req.user);
-  const query = User.findOne({ username: req.body.username });
-  const foundUser = await query.exec();
-
-  if (foundUser) {
-    req.body.username = foundUser.username;
-  }
-  return passportLogin(req, res);
-});
+router.post('/login', async (req, res) => passportLogin(req, res));
 
 router.get('/logout', (req, res) => {
-  console.log('logout', req.user);
   req.logout();
-  console.log('req.user:', req.user);
-  return res.send(JSON.stringify(req.user));
+  return res.json(req.user);
 });
 
 module.exports = router;

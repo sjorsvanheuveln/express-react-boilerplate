@@ -11,8 +11,8 @@ class LoginPage extends React.Component {
     super(props);
 
     this.state = {
-      username: 'drFreeze',
-      password: '21million',
+      username: 'satoshi',
+      password: 'nakamoto',
       status: 'unknown',
       redirect: false,
     };
@@ -20,6 +20,7 @@ class LoginPage extends React.Component {
     this.attemptLogin = this.attemptLogin.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleEmailChange(e) {
@@ -28,6 +29,13 @@ class LoginPage extends React.Component {
 
   handlePasswordChange(e) {
     this.setState({ password: e.target.value });
+  }
+
+  handleKeyPress(target) {
+    if (target.charCode === 13) {
+      target.preventDefault();
+      this.attemptLogin();
+    }
   }
 
   attemptLogin() {
@@ -53,7 +61,7 @@ class LoginPage extends React.Component {
           <div className="col-10 col-sm-7 col-md-5 col-lg-4">
             <h1>Login Page</h1>
             <p>This is the login page.</p>
-            <Form>
+            <Form onKeyPress={this.handleKeyPress}>
               <FormGroup>
                 <Label for="exampleEmail">Email</Label>
                 <Input

@@ -6,8 +6,6 @@ export default function ErrorBox() {
   const { error, isError } = useSelector((state) => state.error);
   const dispatch = useDispatch();
 
-  console.log('error club', error);
-
   function close() {
     dispatch(clearError());
   }
