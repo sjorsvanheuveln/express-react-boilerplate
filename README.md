@@ -55,8 +55,6 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 
 ## To Do ##
 * Expand Passport to Socials
-* Finally remove redux-logger?
-* Fix database duplicates and security.
 
 ## Questions ##
 1. React now demands proptypes to check props. Is this necessary?
@@ -65,7 +63,9 @@ The MERN setup with hot-reloading without needing webpack-dev-server.
 2. React Router can't reload pages where a nested route doesn't exist.
   -> /account/login won't be reloaded as /account doesn't exist.
 3. How to combine Passport strategies.
-4. 
+4. So logging in basically just getting a user object from the database into the state.
+  -> Can't the state be hacked in a way through insertion of some kind?
+
 
 ## Log ##
 ### 13 May: HMR Breakthrough ###
@@ -137,12 +137,25 @@ IVO style photosynthese here we go!
 I could move the error dispatches to the rejected action.
 
 to do:
-1. Registration error handling!
-  a. Incomplete data
-  b. Duplicates
-  c. Already registered -> otherwise we have a bug now
-2. There probably is a better way of handling errors with createAsync!!!
+1. Error Handling:
+  * on logout
+  * implement clearError
+2. Form Validation
+3. There probably is a better way of handling errors with createAsync!!!
   -> Yes, there should be!!!!
+
+### 28 May: Experimentation ###
+Do some more experimenting with how the asyncThunk works.
+I think the dispatch(failure) is already triggering the login.rejected procedure!
+Because I can just return from the login-error {username: 'nonsense'} and I'll have it working.
+Ideal would be to handle the error in login.rejected!!!
+
+4. Figure out how passport works. Passport throws a 401 as a response I think.
+Is setting redux states safe? Maybe there should be authentication on the premium pages.
+Should premium be an auth->thingy?
+
+-> Yes Passport output a res.statusCode = 200 for succes 401 for unauthorized.
+
 
 
 ## Epiphanies ##

@@ -38,7 +38,7 @@ export default function Header(props) {
           <NavItem>
             <NavLink tag={Link} to="/register">Register</NavLink>
           </NavItem>
-            { handleLogin(isLoggedIn, username, logoutClick) }
+          { handleLogin(isLoggedIn, username, logoutClick) }
         </Nav>
       </Collapse>
     </Navbar>

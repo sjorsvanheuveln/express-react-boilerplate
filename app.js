@@ -24,7 +24,10 @@ const authRouter = require('./routes/api/authentication');
 const app = express();
 
 // Connect Mongoose //
-mongoose.connect('mongodb://localhost/express-react');
+mongoose.connect('mongodb://localhost/express-react', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,7 +50,7 @@ app.use(cookieParser());
 app.use(require('express-session')({
   secret: 'ramdom asdfjkjasdf',
   resave: false,
-  saveUnitialized: false,
+  saveUninitialized: false,
 }));
 app.use(passport.initialize());
 app.use(passport.session());

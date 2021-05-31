@@ -7,14 +7,17 @@ const router = express.Router();
 function passportLogin(req, res) {
   passport.authenticate('local')(req, res, () => {
     if (req.user) {
+      console.log('passport response correct', res.statusCode);
       return res.json(req.user);
     }
+    console.log('passport response correct', res.statusCode);
     return res.json({ error: 'There was an error logging in.' });
   });
 }
 
 // Get ot /checksession
 router.get('/checksession', (req, res) => {
+  console.log('req.user', req.user);
   if (req.user) {
     return res.json(req.user);
   }
@@ -46,6 +49,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => passportLogin(req, res));
 
 router.get('/logout', (req, res) => {
+  console.log('logging out', req.body, req.user);
   req.logout();
   return res.json(req.user);
 });

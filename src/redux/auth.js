@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
 import { off, on } from './progress';
-import { failure } from './error';
+import { failure, clearError } from './error';
 
 const initialState = {
   firstName: '',
@@ -29,6 +28,7 @@ function loginState(state, action) {
 export const login = createAsyncThunk(
   'auth/login',
   (userData, { dispatch }) => {
+    dispatch(clearError());
     dispatch(on());
     return fetch(
       'api/authentication/login',
@@ -43,7 +43,8 @@ export const login = createAsyncThunk(
     ).then((response) => {
       dispatch(off());
       if (!response.ok) {
-        return dispatch(failure({ message: 'Email of Wachtwoord niet correct. Probeer opnieuw.' }));
+        dispatch(failure({ message: 'Email of Wachtwoord niet correct. Probeer opnieuw.' }));
+        throw Error;
       }
       return response.json();
     });
@@ -62,7 +63,7 @@ export const logout = createAsyncThunk(
       return dispatch(failure({ message: 'Er ging iets mis met uitloggen. Probeer opnieuw.' }));
     }
     return response.json();
-  }).then((json) => json),
+  }),
 );
 
 export const checkSession = createAsyncThunk(
@@ -73,11 +74,9 @@ export const checkSession = createAsyncThunk(
       credentials: 'same-origin',
     },
   ).then((response) => {
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
+    if (!response.ok) { throw Error; }
     return response.json();
-  }).then((json) => json),
+  }),
 );
 
 export const register = createAsyncThunk(
@@ -99,7 +98,6 @@ export const register = createAsyncThunk(
     }
     return response.json();
   }).then((json) => {
-    console.log('json', json);
     if (json.error) {
       dispatch(failure({ message: json.error }));
       throw Error(json.error);
@@ -118,6 +116,7 @@ export const authSlice = createSlice({
   },
   extraReducers: {
     [register.rejected]: (state, action) => {
+      // return just state again after debugging
       console.log('REDUCER: reg rejected', action);
       return state;
     },
@@ -134,7 +133,10 @@ export const authSlice = createSlice({
       if (action.payload.username) { return loginState(state, action); }
       return initialState;
     },
-    [logout.rejected]: (state) => state,
+    [logout.rejected]: (state, action) => {
+      console.log('RED. LOGOUT REJECTED', action);
+      return state;
+    },
     [logout.fulfilled]: () => initialState,
     [checkSession.rejected]: () => initialState,
     [checkSession.fulfilled]: (state, action) => {

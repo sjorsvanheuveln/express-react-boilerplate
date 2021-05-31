@@ -12,7 +12,7 @@ export default function ErrorBox() {
 
   return (
     <div className="row justify-content-center">
-      <div className="col-6">
+      <div className="col-10 col-sm-7 col-md-5 col-lg-4">
         <Alert color="danger" isOpen={isError} toggle={close}>
           <strong>Error:</strong> {error.message}
         </Alert>
