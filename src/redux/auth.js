@@ -99,12 +99,12 @@ export const register = createAsyncThunk(
     return response.json();
   }).then((json) => {
     if (json.error) {
+      console.log('json error', json.error);
       dispatch(failure({ message: json.error }));
       throw Error(json.error);
     }
     return json;
   }),
-
 );
 
 /* eslint no-param-reassign: 0 */

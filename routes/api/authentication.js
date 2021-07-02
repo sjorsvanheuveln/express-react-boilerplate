@@ -29,6 +29,8 @@ router.post('/register', async (req, res) => {
   const query = User.findOne({ email: req.body.email });
   const foundUser = await query.exec();
 
+  console.log('founduser', foundUser);
+
   if (foundUser) {
     return res.json({ error: 'BACKEND: Email of username bestaat al.' });
   }
@@ -37,7 +39,8 @@ router.post('/register', async (req, res) => {
 
   User.register(newUser, req.body.password, (err) => {
     if (err) {
-      return res.json({ error: err });
+      console.log('passport error', err);
+      return res.json({ error: err.message });
     }
 
     // log user in if no errors

@@ -157,6 +157,9 @@ Should premium be an auth->thingy?
 -> Yes Passport output a res.statusCode = 200 for succes 401 for unauthorized.
 
 
+### 05 jun 2021 ###
+* how to use unique database entry?
+
 
 ## Epiphanies ##
 Being angry or in an angry position is just an excuse for not facing uncertainty/insecurity. It stops the creativity.
